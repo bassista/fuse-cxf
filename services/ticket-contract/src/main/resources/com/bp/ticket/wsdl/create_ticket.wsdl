@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://createticket.example.camel.apache.org"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="http://createticket.example.camel.apache.org">
+
+    <!-- Type definitions for input- and output parameters for webservice -->
+    <wsdl:types>
+        <xs:schema targetNamespace="http://createticket.example.camel.apache.org">
+            <xs:element name="inputCreateTicket">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="xs:string" name="summary"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="outputCreateTicket">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element type="xs:integer" name="code"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+
+    <!-- Message definitions for input and output -->
+    <wsdl:message name="inputCreateTicket">
+        <wsdl:part name="in" element="tns:inputCreateTicket"/>
+    </wsdl:message>
+    <wsdl:message name="outputCreateTicket">
+        <wsdl:part name="out" element="tns:outputCreateTicket"/>
+    </wsdl:message>
+
+    <!-- Port (interface) definitions -->
+    <wsdl:portType name="CreateTicketEndpoint">
+        <wsdl:operation name="CreateTicket">
+            <wsdl:input message="tns:inputCreateTicket"/>
+            <wsdl:output message="tns:outputCreateTicket"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <!-- Port bindings to transports and encoding - HTTP, document literal encoding is used -->
+    <wsdl:binding name="CreateTicketBinding" type="tns:CreateTicketEndpoint">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="CreateTicket">
+            <soap:operation
+                    soapAction="http://createticket.example.camel.apache.org/CreateTicket"
+                    style="document"/>
+            <wsdl:input>
+                <soap:body parts="in" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="out" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <!-- Service definition -->
+    <wsdl:service name="CreateTicketEndpointService">
+        <wsdl:port name="CreateTicketEndpoint" binding="tns:CreateTicketBinding">
+            <soap:address location="http://localhost:8181/cxf/camel-example-cxf-blueprint/webservices/ticket"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
