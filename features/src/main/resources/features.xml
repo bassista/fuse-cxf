@@ -10,7 +10,27 @@
         <feature dependency="true" >fabric-core</feature>
         <bundle>mvn:com.ofbizian/ticket-contract/${project.version}</bundle>
         <bundle>mvn:com.ofbizian/ticket-service/${project.version}</bundle>
-        <bundle>mvn:com.ofbizian/incident-service/${project.version}</bundle>
     </feature>
 
+    <feature name="ticket-service" resolver="(obr)" version="${project.version}">
+        <feature dependency="true" >camel</feature>
+        <feature dependency="true" >camel-jaxb</feature>
+        <feature dependency="true" >camel-blueprint</feature>
+        <feature>camel-cxf</feature>
+        <feature dependency="true" >cxf</feature>
+        <feature dependency="true" >fabric-core</feature>
+        <bundle>mvn:com.ofbizian/ticket-contract/${project.version}</bundle>
+        <bundle>mvn:com.ofbizian/ticket-service/${project.version}</bundle>
+    </feature>
+
+    <feature name="incident-service" resolver="(obr)" version="${project.version}">
+        <feature dependency="true" >camel</feature>
+        <feature dependency="true" >camel-jaxb</feature>
+        <feature dependency="true" >camel-blueprint</feature>
+        <feature>camel-cxf</feature>
+        <feature dependency="true" >cxf</feature>
+        <feature dependency="true" >fabric-core</feature>
+        <bundle>mvn:com.ofbizian/ticket-contract/${project.version}</bundle>
+        <bundle>mvn:com.ofbizian/incident-service/${project.version}</bundle>
+    </feature>
 </features>
